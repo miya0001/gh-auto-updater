@@ -6,7 +6,7 @@ This library enables your WordPress plugin to automatic update with GitHub API.
 
 ## Getting Started
 
-1. The easier way to install this is by using composer.
+### 1. The easier way to install this is by using composer.
 
 ```
 $ composer require miya/gh-auto-updater
@@ -14,7 +14,7 @@ $ composer require miya/gh-auto-updater
 
 This project is in progress, you should add `"minimum-stability": "dev"` into `composer.json`.
 
-2. Activate automatic update in your WordPress plugin.
+### 2. Activate automatic update in your WordPress plugin.
 
 ```
 </php
