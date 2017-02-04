@@ -47,7 +47,7 @@ class GH_Auto_Update
 			$obj->new_version = $remote_version->tag_name;
 			$obj->url = $remote_version->html_url;
 			$obj->plugin = $this->slug;
-			$obj->package = $this->get_download_url( $remote_version->tag_name );
+			$obj->package = $this->get_download_url( $remote_version );
 			$transient->response[ $this->slug ] = $obj;
 		}
 		return $transient;
@@ -68,21 +68,16 @@ class GH_Auto_Update
 			$obj->sections = array(
 				'changelog' => $remote_version->body
 			);
-			$obj->download_link = $this->get_download_url( $remote_version->tag_name );
+			$obj->download_link = $this->get_download_url( $remote_version );
 			return $obj;
 		}
 
 		return $obj;
 	}
 
-	private function get_download_url( $tag_name )
+	private function get_download_url( $remote_version )
 	{
-		return sprintf(
-			'https://github.com/%s/%s/archive/%s.zip',
-			$this->gh_user,
-			$this->gh_repo,
-			$tag_name
-		);
+		return $remote_version->assets[0]->browser_download_url;
 	}
 
 	private function get_plugin_info()
