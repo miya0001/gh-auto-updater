@@ -1,1 +1,1 @@
-# miya/gh-auto-update
+# Miya\WP\GH_Auto_Update
