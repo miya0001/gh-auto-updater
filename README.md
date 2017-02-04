@@ -54,5 +54,5 @@ $ git push origin 1.1.0
 1. Please visit "releases" in your GitHub repository.
 2. Choose a tag.
 3. Fill out the release not and title.
-4. Upload your plugin which is comporessed with zip.
+4. Upload your plugin which is comporessed with zip. (Optional)
 5. Press "Publish release".
