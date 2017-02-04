@@ -85,7 +85,7 @@ class GH_Auto_Update
 				'https://github.com/%s/%s/archive/%s.zip',
 				$this->gh_user,
 				$this->gh_repo,
-				$remote_version->tag_nam
+				$remote_version->tag_name
 			);
 		}
 	}
