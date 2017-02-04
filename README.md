@@ -67,7 +67,7 @@ Please install old version of following projects, then you can see update notice
 These projects deploy new releases automatically with Travis CI.
 
 ```
-travis setup releases
+$ travis setup releases
 ```
 
 Please check `.travis.yml` and [documentation](https://docs.travis-ci.com/user/deployment/releases/).
