@@ -1,1 +1,1 @@
-# gh-auto-updater
+# miya/gh-auto-update
