@@ -63,3 +63,6 @@ Please install old version of following projects, then you can see update notice
 
 * https://github.com/miya0001/gh-auto-updater-example
 * https://github.com/miya0001/miya-gallery
+
+These projects deploy new releases automatically with Travis CI.
+Please check `.travis.yml`.
