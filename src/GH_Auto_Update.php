@@ -77,7 +77,17 @@ class GH_Auto_Update
 
 	private function get_download_url( $remote_version )
 	{
-		return $remote_version->assets[0]->browser_download_url;
+		if ( ! empty( $remote_version->assets[0] )
+				&& ! empty( $remote_version->assets[0]->browser_download_url ) ) {
+			return $remote_version->assets[0]->browser_download_url;
+		} else {
+			return sprintf(
+				'https://github.com/%s/%s/archive/%s.zip',
+				$this->gh_user,
+				$this->gh_repo,
+				$remote_version->tag_nam
+			);
+		}
 	}
 
 	private function get_plugin_info()
