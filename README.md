@@ -56,3 +56,10 @@ $ git push origin 1.1.0
 3. Fill out the release not and title.
 4. Upload your plugin which is comporessed with zip. (Optional)
 5. Press "Publish release".
+
+## Example Projects
+
+Please install old version of following projects, then you can see update notice.
+
+* https://github.com/miya0001/gh-auto-updater-example
+* https://github.com/miya0001/miya-gallery
