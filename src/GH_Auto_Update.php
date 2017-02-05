@@ -50,7 +50,8 @@ class GH_Auto_Update
 	public function plugins_api( $obj, $action, $arg )
 	{
 		if ( ( 'query_plugins' === $action || 'plugin_information' === $action ) &&
-				isset( $arg->slug ) && $arg->slug === $this->slug ) {
+				isset( $arg->slug ) && $arg->slug === dirname( $this->slug ) ) {
+
 			$remote_version = $this->get_api_data( '/releases/latest' );
 			if ( is_wp_error( $remote_version ) ) {
 				return $obj;
@@ -125,7 +126,7 @@ class GH_Auto_Update
 
 	private function get_plugin_info()
 	{
-		$plugin = get_plugin_data( WP_PLUGIN_DIR . '/' . $this->plugin_slug );
+		$plugin = get_plugin_data( WP_PLUGIN_DIR . '/' . $this->slug );
 		return $plugin;
 	}
 
@@ -133,7 +134,7 @@ class GH_Auto_Update
 	{
 		$res = wp_remote_get( $this->get_gh_api( $endpoint ) );
 		if ( 200 !== wp_remote_retrieve_response_code( $res ) ) {
-			return new WP_Error( wp_remote_retrieve_body( $res ) );
+			return new \WP_Error( wp_remote_retrieve_body( $res ) );
 		}
 		$body = wp_remote_retrieve_body( $res );
 		return json_decode( $body );
