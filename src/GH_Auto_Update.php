@@ -17,6 +17,9 @@ class GH_Auto_Update
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'pre_set_site_transient_update_plugins' ) );
 		add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
 		add_filter( 'upgrader_source_selection', array( $this, 'upgrader_source_selection' ), 1 );
+		add_action( 'admin_head', function() {
+			echo '<style>#plugin-information .section img{ max-width: 100%; height: auto; }</style>';
+		} );
 	}
 
 	public function upgrader_source_selection( $source )
@@ -57,16 +60,10 @@ class GH_Auto_Update
 				return $obj;
 			}
 
-			$remote_plugin = $this->get_api_data();
-			if ( is_wp_error( $remote_plugin ) ) {
-				return $obj;
-			}
-
 			$current_version = $this->get_plugin_info();
 
 			return $this->get_plugins_api_object(
 				$remote_version,
-				$remote_plugin,
 				$current_version
 			);
 		}
@@ -74,31 +71,42 @@ class GH_Auto_Update
 		return $obj;
 	}
 
-	private function get_plugins_api_object( $remote_version, $remote_plugin, $current_version )
+	private function get_plugins_api_object( $remote_version, $current_version )
 	{
 		$obj = new \stdClass();
 		$obj->slug = $this->slug;
-		$obj->name = $current_version['Name'];
-		$obj->plugin_name = $current_version['Name'];
+		$obj->name = esc_html( $current_version['Name'] );
+		$obj->plugin_name = esc_html( $current_version['Name'] );
 		$obj->author = sprintf(
 			'<a href="%1$s" target="_blank">%2$s</a>',
-			$remote_plugin->owner->html_url,
-			$remote_plugin->owner->login
+			esc_url( $remote_version->author->html_url ),
+			esc_html( $remote_version->author->login )
 		);
-		$obj->homepage = $remote_plugin->html_url;
+		$obj->homepage = esc_url( sprintf(
+			'https://github.com/%1$s/%2$s',
+			$this->gh_user,
+			$this->gh_repo
+		) );
 		$obj->version = sprintf(
 			'<a href="%1$s" target="_blank">%2$s</a>',
 			$remote_version->html_url,
 			$remote_version->tag_name
 		);
-		$obj->num_ratings = $remote_plugin->stargazers_count;
 		$obj->last_updated = $remote_version->published_at;
 
 		$parsedown = new \Parsedown();
+		$changelog = $parsedown->text( $remote_version->body );
+		$readme = '';
+		if ( is_file( WP_PLUGIN_DIR . '/' . dirname( $this->slug ) . '/README.md' ) ) {
+			$readme = $parsedown->text( file_get_contents(
+				WP_PLUGIN_DIR . '/' . dirname( $this->slug ) . '/README.md'
+			) );
+		}
 		$obj->sections = array(
-			'changelog' => $parsedown->text( $remote_version->body )
+			'readme' => $readme,
+			'changelog' => $changelog
 		);
-		$obj->download_link = $this->get_download_url( $remote_version );
+		$obj->download_link = esc_url( $this->get_download_url( $remote_version ) );
 		return $obj;
 	}
 

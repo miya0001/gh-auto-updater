@@ -175,10 +175,6 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$method->setAccessible( true );
 		$remote_version = $method->invoke( $updater, '/releases/latest' );
 
-		$method = $reflection->getMethod( 'get_api_data' );
-		$method->setAccessible( true );
-		$remote_plugin = $method->invoke( $updater );
-
 		$current_version = array( 'Name' => 'Hello' );
 
 		$method = $reflection->getMethod( 'get_plugins_api_object' );
@@ -186,7 +182,6 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$res = $method->invoke(
 			$updater,
 			$remote_version,
-			$remote_plugin,
 			$current_version
 		);
 
