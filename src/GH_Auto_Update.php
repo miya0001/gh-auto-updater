@@ -37,7 +37,7 @@ class GH_Auto_Update
 			return $transient;
 		}
 
-		$remote_version = $this->get_api_data();
+		$remote_version = $this->get_api_data( '/releases/latest' );
 		if ( is_wp_error( $remote_version ) ) {
 			return $transient;
 		}
@@ -51,24 +51,43 @@ class GH_Auto_Update
 	{
 		if ( ( 'query_plugins' === $action || 'plugin_information' === $action ) &&
 				isset( $arg->slug ) && $arg->slug === $this->slug ) {
-			$remote_version = $this->get_api_data();
+			$remote_version = $this->get_api_data( '/releases/latest' );
 			if ( is_wp_error( $remote_version ) ) {
 				return $obj;
 			}
+
+			$remote_plugin = $this->get_api_data();
+			if ( is_wp_error( $remote_plugin ) ) {
+				return $obj;
+			}
+
 			$current_version = $this->get_plugin_info();
 
-			$obj = new \stdClass();
-			$obj->slug = $this->slug;
-			$obj->name = $current_version['Name'];
-			$obj->new_version = $remote_version->tag_name;
-			$obj->last_updated = $remote_version->published_at;
-			$obj->sections = array(
-				'changelog' => $remote_version->body
+			return $this->get_plugins_api_object(
+				$remote_version,
+				$remote_plugin,
+				$current_version
 			);
-			$obj->download_link = $this->get_download_url( $remote_version );
-			return $obj;
 		}
 
+		return $obj;
+	}
+
+	private function get_plugins_api_object( $remote_version, $remote_plugin, $current_version )
+	{
+		$obj = new \stdClass();
+		$obj->slug = $this->slug;
+		$obj->name = $current_version['Name'];
+		$obj->plugin_name = $current_version['Name'];
+		$obj->author = $remote_plugin->owner->login;
+		$obj->homepage = $remote_plugin->html_url;
+		$obj->version = $remote_version->tag_name;
+		$obj->num_ratings = $remote_plugin->stargazers_count;
+		$obj->last_updated = $remote_version->published_at;
+		$obj->sections = array(
+			'changelog' => $remote_version->body
+		);
+		$obj->download_link = $this->get_download_url( $remote_version );
 		return $obj;
 	}
 
@@ -110,9 +129,9 @@ class GH_Auto_Update
 		return $plugin;
 	}
 
-	private function get_api_data()
+	private function get_api_data( $endpoint = null )
 	{
-		$res = wp_remote_get( $this->get_gh_api() );
+		$res = wp_remote_get( $this->get_gh_api( $endpoint ) );
 		if ( 200 !== wp_remote_retrieve_response_code( $res ) ) {
 			return new WP_Error( wp_remote_retrieve_body( $res ) );
 		}
@@ -120,10 +139,10 @@ class GH_Auto_Update
 		return json_decode( $body );
 	}
 
-	private function get_gh_api( $endpoint = 'releases' )
+	private function get_gh_api( $endpoint = null )
 	{
 		return esc_url_raw( sprintf(
-			'https://api.github.com/repos/%1$s/%2$s/%3$s/latest',
+			'https://api.github.com/repos/%1$s/%2$s%3$s',
 			$this->gh_user,
 			$this->gh_repo,
 			$endpoint

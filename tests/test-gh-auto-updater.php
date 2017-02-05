@@ -28,7 +28,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$reflection = new \ReflectionClass( $updater );
 		$method = $reflection->getMethod( 'get_gh_api' );
 		$method->setAccessible( true );
-		$res = $method->invoke( $updater );
+		$res = $method->invoke( $updater, '/releases/latest' );
 		$this->assertSame(
 			"https://api.github.com/repos/miya0001/gh-auto-updater-example/releases/latest",
 			$res
@@ -49,7 +49,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$reflection = new \ReflectionClass( $updater );
 		$method = $reflection->getMethod( 'get_api_data' );
 		$method->setAccessible( true );
-		$res = $method->invoke( $updater );
+		$res = $method->invoke( $updater, '/releases/latest' );
 		$expect = "https://api.github.com/repos/miya0001/gh-auto-updater-example/releases";
 		$this->assertTrue( 0 === strpos( $res->url, $expect ) );
 		$this->assertSame( 1, count( $res->assets ) );
@@ -133,4 +133,37 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$this->assertTrue( ! count( $res->response ) );
 	}
 
+	/**
+	 * get_plugins_api_object()
+	 */
+	public function test_get_plugins_api_object()
+	{
+		$gh_user = 'miya0001';
+		$gh_repo = 'gh-auto-updater-example';
+		$plugin_slug = 'hello/hello.php';
+		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+
+		$reflection = new \ReflectionClass( $updater );
+
+		$method = $reflection->getMethod( 'get_api_data' );
+		$method->setAccessible( true );
+		$remote_version = $method->invoke( $updater, '/releases/latest' );
+
+		$method = $reflection->getMethod( 'get_api_data' );
+		$method->setAccessible( true );
+		$remote_plugin = $method->invoke( $updater );
+
+		$current_version = array( 'Name' => 'Hello' );
+
+		$method = $reflection->getMethod( 'get_plugins_api_object' );
+		$method->setAccessible( true );
+		$res = $method->invoke(
+			$updater,
+			$remote_version,
+			$remote_plugin,
+			$current_version
+		);
+
+		var_dump($res);
+	}
 }
