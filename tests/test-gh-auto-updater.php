@@ -21,7 +21,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	{
 		$gh_user = 'miya0001';
 		$gh_repo = 'gh-auto-updater-example';
-		$updater = new GH_Auto_Update( $gh_user, $gh_repo, __FILE__ );
+		$updater = new GH_Auto_Update( __FILE__, $gh_user, $gh_repo );
 
 		// For a private function.
 		$reflection = new \ReflectionClass( $updater );
@@ -41,7 +41,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	{
 		$gh_user = 'miya0001';
 		$gh_repo = 'gh-auto-updater-example';
-		$updater = new GH_Auto_Update( $gh_user, $gh_repo, __FILE__ );
+		$updater = new GH_Auto_Update( __FILE__, $gh_user, $gh_repo );
 
 		// For a private function.
 		$reflection = new \ReflectionClass( $updater );

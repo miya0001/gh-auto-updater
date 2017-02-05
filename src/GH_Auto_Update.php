@@ -9,7 +9,7 @@ class GH_Auto_Update
 	private $plugin_file;
 	private $slug;
 
-	public function __construct( $gh_user, $gh_repo, $plugin_file )
+	public function __construct( $plugin_file, $gh_user, $gh_repo )
 	{
 		$this->gh_user     = $gh_user;
 		$this->gh_repo     = $gh_repo;
@@ -23,8 +23,9 @@ class GH_Auto_Update
 
 	public function upgrader_source_selection( $source )
 	{
-		if(  strpos( $source, $this->gh_repo ) === false )
+		if(  strpos( $source, $this->gh_repo ) === false ) {
 			return $source;
+		}
 
 		$path_parts = pathinfo( $source );
 		$newsource = trailingslashit( $path_parts['dirname'] ) . trailingslashit( $this->gh_repo );
