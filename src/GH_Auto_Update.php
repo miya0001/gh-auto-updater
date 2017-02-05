@@ -50,7 +50,7 @@ class GH_Auto_Update
 	public function plugins_api( $obj, $action, $arg )
 	{
 		if ( ( 'query_plugins' === $action || 'plugin_information' === $action ) &&
-				isset( $arg->slug ) && $arg->slug === dirname( $this->slug ) ) {
+				isset( $arg->slug ) && $arg->slug === $this->slug ) {
 
 			$remote_version = $this->get_api_data( '/releases/latest' );
 			if ( is_wp_error( $remote_version ) ) {
@@ -104,7 +104,7 @@ class GH_Auto_Update
 	{
 		if ( version_compare( $current_version['Version'], $remote_version->tag_name, '<' ) ) {
 			$obj = new \stdClass();
-			$obj->slug = dirname( $this->slug );
+			$obj->slug = $this->slug;
 			$obj->plugin = $this->slug;
 			$obj->new_version = $remote_version->tag_name;
 			$obj->url = $remote_version->html_url;
