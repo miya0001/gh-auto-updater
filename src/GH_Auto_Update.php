@@ -80,9 +80,17 @@ class GH_Auto_Update
 		$obj->slug = $this->slug;
 		$obj->name = $current_version['Name'];
 		$obj->plugin_name = $current_version['Name'];
-		$obj->author = $remote_plugin->owner->login;
+		$obj->author = sprintf(
+			'<a href="%1$s" target="_blank">%2$s</a>',
+			$remote_plugin->owner->html_url,
+			$remote_plugin->owner->login
+		);
 		$obj->homepage = $remote_plugin->html_url;
-		$obj->version = $remote_version->tag_name;
+		$obj->version = sprintf(
+			'<a href="%1$s" target="_blank">%2$s</a>',
+			$remote_version->html_url,
+			$remote_version->tag_name
+		);
 		$obj->num_ratings = $remote_plugin->stargazers_count;
 		$obj->last_updated = $remote_version->published_at;
 		$obj->sections = array(
