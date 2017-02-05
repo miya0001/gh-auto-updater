@@ -164,6 +164,8 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 			$current_version
 		);
 
-		var_dump($res);
+		foreach ( $res as $key => $value ) {
+			$this->assertTrue( !! $value );
+		}
 	}
 }
