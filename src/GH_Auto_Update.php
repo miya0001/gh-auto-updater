@@ -150,11 +150,19 @@ class GH_Auto_Update
 
 	private function get_gh_api( $endpoint = null )
 	{
-		return esc_url_raw( sprintf(
+		$url = sprintf(
 			'https://api.github.com/repos/%1$s/%2$s%3$s',
 			$this->gh_user,
 			$this->gh_repo,
 			$endpoint
-		), 'https' );
+		);
+
+		if ( defined( 'GITHUB_ACCESS_TOKEN' ) && GITHUB_ACCESS_TOKEN ) {
+			$url = add_query_arg( array(
+				'access_token' => GITHUB_ACCESS_TOKEN
+			), $url );
+		}
+
+		return esc_url_raw( $url, 'https' );
 	}
 }

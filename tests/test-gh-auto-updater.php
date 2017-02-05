@@ -36,6 +36,32 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	}
 
 	/**
+	 * get_gh_api()
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	function test_get_gh_api_with_token()
+	{
+		$gh_user = 'miya0001';
+		$gh_repo = 'gh-auto-updater-example';
+		$plugin_slug = 'hello/hello.php';
+		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+
+		define( 'GITHUB_ACCESS_TOKEN', 'xxxx' );
+
+		// For a private function.
+		$reflection = new \ReflectionClass( $updater );
+		$method = $reflection->getMethod( 'get_gh_api' );
+		$method->setAccessible( true );
+		$res = $method->invoke( $updater );
+		$this->assertSame(
+			"https://api.github.com/repos/miya0001/gh-auto-updater-example?access_token=xxxx",
+			$res
+		);
+	}
+
+	/**
 	 * get_api_data()
 	 */
 	function test_get_api_data()
