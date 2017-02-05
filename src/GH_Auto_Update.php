@@ -93,8 +93,10 @@ class GH_Auto_Update
 		);
 		$obj->num_ratings = $remote_plugin->stargazers_count;
 		$obj->last_updated = $remote_version->published_at;
+
+		$parsedown = new \Parsedown();
 		$obj->sections = array(
-			'changelog' => $remote_version->body
+			'changelog' => $parsedown->text( $remote_version->body )
 		);
 		$obj->download_link = $this->get_download_url( $remote_version );
 		return $obj;
