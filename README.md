@@ -16,7 +16,7 @@ A composer library for self-hosted WordPress plugin on GitHub with automatic upd
 $ composer require miya/gh-auto-updater
 ```
 
-This project is in progress, you should add `"minimum-stability": "dev"` into `composer.json`.
+This project is in progress, you should add `"minimum-stability": "dev"` into `composer.json` for now.
 
 ### 2. Activate automatic update in your WordPress plugin.
 
