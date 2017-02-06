@@ -32,6 +32,14 @@ add_action( 'init', function() {
 } );
 ```
 
+### 3. GitHub Access Token (Optional)
+
+You use [personal access token](https://github.com/settings/tokens).
+
+```
+define( 'GITHUB_ACCESS_TOKEN', 'xxxxxxxx' );
+```
+
 ## How to update your plugin.
 
 To release the new version, please do as follows:
