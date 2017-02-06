@@ -71,14 +71,14 @@ Please check `.travis.yml` and [documentation](https://docs.travis-ci.com/user/d
 
 ## Screenshots
 
-1. Notification on "Plugins" screen in WordPress dashboard.
+### 1. Notification on "Plugins" screen in WordPress dashboard.
 
 ![](https://www.evernote.com/l/ABWSJIw142RMkpfNrYPVpqlRYGSwTvX4QDAB/image.png)
 
-2. "Details" screen in WordPress dashboard. You can see release note on GitHub as changelog.
+### 2. "Details" screen in WordPress dashboard. You can see release note on GitHub as changelog.
 
 ![](https://www.evernote.com/l/ABVxHaSGVRJJR7mi0ooGSXc-v-DPIPLcyJIB/image.png)
 
-3. "WordPress Updates" screen.
+### 3. "WordPress Updates" screen.
 
 ![](https://www.evernote.com/l/ABV7s-EVtNJOF5JDVxi-rkwShYRtGhs2wlgB/image.png)
