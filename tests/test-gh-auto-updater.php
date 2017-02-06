@@ -20,7 +20,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_gh_api()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -30,7 +30,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$method->setAccessible( true );
 		$res = $method->invoke( $updater, '/releases/latest' );
 		$this->assertSame(
-			"https://api.github.com/repos/miya0001/gh-auto-updater-example/releases/latest",
+			"https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github/releases/latest",
 			$res
 		);
 	}
@@ -44,7 +44,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_gh_api_with_token()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -56,7 +56,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$method->setAccessible( true );
 		$res = $method->invoke( $updater );
 		$this->assertSame(
-			"https://api.github.com/repos/miya0001/gh-auto-updater-example?access_token=xxxx",
+			"https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github?access_token=xxxx",
 			$res
 		);
 	}
@@ -67,7 +67,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_api_data()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -76,7 +76,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$method = $reflection->getMethod( 'get_api_data' );
 		$method->setAccessible( true );
 		$res = $method->invoke( $updater, '/releases/latest' );
-		$expect = "https://api.github.com/repos/miya0001/gh-auto-updater-example/releases";
+		$expect = "https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github/releases";
 		$this->assertTrue( 0 === strpos( $res->url, $expect ) );
 		$this->assertSame( 1, count( $res->assets ) );
 	}
@@ -87,7 +87,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_dowload_url()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -111,7 +111,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_newer_version()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -140,7 +140,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	function test_get_newer_version_with_new_version()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
@@ -165,7 +165,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 	public function test_get_plugins_api_object()
 	{
 		$gh_user = 'miya0001';
-		$gh_repo = 'gh-auto-updater-example';
+		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
 		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
 
