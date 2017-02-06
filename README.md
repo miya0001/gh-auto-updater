@@ -1,8 +1,12 @@
 # Automatic Updater with GitHub API for WordPress Plugin
 
 [![Build Status](https://travis-ci.org/miya0001/gh-auto-updater.svg?branch=master)](https://travis-ci.org/miya0001/gh-auto-updater)
+[![Latest Stable Version](https://poser.pugx.org/miya/gh-auto-updater/v/stable)](https://packagist.org/packages/miya/gh-auto-updater)
+[![Total Downloads](https://poser.pugx.org/miya/gh-auto-updater/downloads)](https://packagist.org/packages/miya/gh-auto-updater)
+[![Latest Unstable Version](https://poser.pugx.org/miya/gh-auto-updater/v/unstable)](https://packagist.org/packages/miya/gh-auto-updater)
+[![License](https://poser.pugx.org/miya/gh-auto-updater/license)](https://packagist.org/packages/miya/gh-auto-updater)
 
-This library enables your WordPress plugin to automatic update with GitHub API.
+A composer library for self-hosted WordPress plugin on GitHub with automatic update.
 
 ## Getting Started
 
@@ -96,3 +100,7 @@ Notification on "Plugins" screen in WordPress dashboard.
 "WordPress Updates" screen.
 
 ![](https://www.evernote.com/l/ABV7s-EVtNJOF5JDVxi-rkwShYRtGhs2wlgB/image.png)
+
+## License
+
+GPL v2
