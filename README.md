@@ -1,4 +1,4 @@
-# Automatic Updater for WordPress Plugin by GitHub API
+# Automatic Updater with GitHub API for WordPress Plugin
 
 [![Build Status](https://travis-ci.org/miya0001/gh-auto-updater.svg?branch=master)](https://travis-ci.org/miya0001/gh-auto-updater)
 [![Latest Stable Version](https://poser.pugx.org/miya/gh-auto-updater/v/stable)](https://packagist.org/packages/miya/gh-auto-updater)
