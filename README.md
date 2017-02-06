@@ -19,12 +19,11 @@ This project is in progress, you should add `"minimum-stability": "dev"` into `c
 ```
 </php
 
-
 // Autoload
 require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
 
-add_action( 'init', function(){
-  $plugin_slug = plugin_basename( __FILE__ );
+add_action( 'init', function() {
+	$plugin_slug = plugin_basename( __FILE__ );
 	$gh_user = 'miya0001';                // The user name of GitHub.
 	$gh_repo = 'gh-auto-updater-example'; // The repository name of your plugin.
 
