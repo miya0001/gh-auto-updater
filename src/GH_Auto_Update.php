@@ -17,9 +17,12 @@ class GH_Auto_Update
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'pre_set_site_transient_update_plugins' ) );
 		add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
 		add_filter( 'upgrader_source_selection', array( $this, 'upgrader_source_selection' ), 1 );
-		add_action( 'admin_head', function() {
-			echo '<style>#plugin-information .section img{ max-width: 100%; height: auto; }</style>';
-		} );
+		add_action( 'admin_head', array( $this, "admin_head" ) );
+	}
+
+	public function admin_head()
+	{
+		echo '<style>#plugin-information .section img{ max-width: 100%; height: auto; }</style>';
 	}
 
 	public function upgrader_source_selection( $source )
