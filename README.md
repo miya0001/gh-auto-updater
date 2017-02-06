@@ -44,7 +44,13 @@ $ git push origin 1.1.0
 ```
 
 * `1.0.0` is a version number, it have to be same with version number in your WordPress plugin.
-* You have to contain `vendor` directory in your plugin or you should use [automatic release](https://docs.travis-ci.com/user/deployment/releases/).
+* You have to commit `vendor` directory in your plugin or you should use [automatic release](https://docs.travis-ci.com/user/deployment/releases/).
+
+Following is an example of the `.travis.yml` for automatic release.
+
+https://github.com/miya0001/miya-gallery/blob/master/.travis.yml
+
+You can generate `deploy:` section by `$ travis setup releases` command.
 
 ### 2. Release the new version.
 
@@ -73,7 +79,7 @@ Please check `.travis.yml` and [documentation](https://docs.travis-ci.com/user/d
 
 Notification on "Plugins" screen in WordPress dashboard.
 
-![Notification on "Plugins" screen in WordPress dashboard.](https://www.evernote.com/l/ABWSJIw142RMkpfNrYPVpqlRYGSwTvX4QDAB/image.png)
+![](https://www.evernote.com/l/ABWSJIw142RMkpfNrYPVpqlRYGSwTvX4QDAB/image.png)
 
 "Details" screen in WordPress dashboard. You can see release note on GitHub as changelog.
 
