@@ -54,13 +54,11 @@ $ git push origin 1.1.0
 4. Upload your plugin which is comporessed with zip. (Optional)
 5. Press "Publish release".
 
-![](https://www.evernote.com/l/ABVIG1PlajlJ5rfHivP4BJRELESS9uKndHAB/image.png)
-
 ## Example Projects
 
 Please install old version of following projects, then you can see update notice.
 
-* https://github.com/miya0001/gh-auto-updater-example
+* https://github.com/miya0001/self-hosted-wordpress-plugin-on-github
 * https://github.com/miya0001/miya-gallery
 
 These projects deploy new releases automatically with Travis CI.
@@ -70,3 +68,17 @@ $ travis setup releases
 ```
 
 Please check `.travis.yml` and [documentation](https://docs.travis-ci.com/user/deployment/releases/).
+
+## Screenshots
+
+1. Notification on "Plugins" screen in WordPress dashboard.
+
+![](https://www.evernote.com/l/ABWSJIw142RMkpfNrYPVpqlRYGSwTvX4QDAB/image.png)
+
+2. "Details" screen in WordPress dashboard. You can see release note on GitHub as changelog.
+
+![](https://www.evernote.com/l/ABVxHaSGVRJJR7mi0ooGSXc-v-DPIPLcyJIB/image.png)
+
+3. "WordPress Updates" screen.
+
+![](https://www.evernote.com/l/ABV7s-EVtNJOF5JDVxi-rkwShYRtGhs2wlgB/image.png)
