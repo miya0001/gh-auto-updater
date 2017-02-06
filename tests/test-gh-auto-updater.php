@@ -14,6 +14,13 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 {
 	protected $updater;
 
+	function setUp()
+	{
+		if ( ! defined( 'GITHUB_ACCESS_TOKEN' ) ) {
+			define( "GITHUB_ACCESS_TOKEN", getenv( 'GITHUB_ACCESS_TOKEN' ) );
+		}
+	}
+
 	/**
 	 * get_gh_api()
 	 */
@@ -29,34 +36,8 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$method = $reflection->getMethod( 'get_gh_api' );
 		$method->setAccessible( true );
 		$res = $method->invoke( $updater, '/releases/latest' );
-		$this->assertSame(
-			"https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github/releases/latest",
-			$res
-		);
-	}
-
-	/**
-	 * get_gh_api()
-	 *
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
-	function test_get_gh_api_with_token()
-	{
-		$gh_user = 'miya0001';
-		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
-		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
-
-		define( 'GITHUB_ACCESS_TOKEN', 'xxxx' );
-
-		// For a private function.
-		$reflection = new \ReflectionClass( $updater );
-		$method = $reflection->getMethod( 'get_gh_api' );
-		$method->setAccessible( true );
-		$res = $method->invoke( $updater );
-		$this->assertSame(
-			"https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github?access_token=xxxx",
+		$this->assertRegExp(
+			"#^https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github/releases/latest#",
 			$res
 		);
 	}
