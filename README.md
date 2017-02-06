@@ -21,24 +21,26 @@ This project is in progress, you should add `"minimum-stability": "dev"` into `c
 ### 2. Activate automatic update in your WordPress plugin.
 
 ```
-</php
+<?php
 
 // Autoload
 require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
 
-add_action( 'init', function() {
-	$plugin_slug = plugin_basename( __FILE__ );
-	$gh_user = 'miya0001';                // The user name of GitHub.
-	$gh_repo = 'gh-auto-updater-example'; // The repository name of your plugin.
+add_action( 'init', 'activate_autoupdate' );
+
+function activate_autoupdate() {
+	$plugin_slug = plugin_basename( __FILE__ ); // e.g. `hello/hello.php`.
+	$gh_user = 'miya0001';                      // The user name of GitHub.
+	$gh_repo = 'gh-auto-updater-example';       // The repository name of your plugin.
 
 	// Activate automatic update.
 	new Miya\WP\GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
-} );
+}
 ```
 
 ### 3. GitHub Access Token (Optional)
 
-You use [personal access token](https://github.com/settings/tokens).
+You can use [personal access token](https://github.com/settings/tokens).
 
 ```
 define( 'GITHUB_ACCESS_TOKEN', 'xxxxxxxx' );
@@ -56,13 +58,7 @@ $ git push origin 1.1.0
 ```
 
 * `1.0.0` is a version number, it have to be same with version number in your WordPress plugin.
-* You have to commit `vendor` directory in your plugin or you should use [automatic release](https://docs.travis-ci.com/user/deployment/releases/).
-
-Following is an example of the `.travis.yml` for automatic release.
-
-https://github.com/miya0001/miya-gallery/blob/master/.travis.yml
-
-You can generate `deploy:` section by `$ travis setup releases` command.
+* You have to commit `vendor` directory in your plugin.
 
 ### 2. Release the new version.
 
@@ -71,6 +67,18 @@ You can generate `deploy:` section by `$ travis setup releases` command.
 3. Fill out the release note and title.
 4. Upload your plugin which is comporessed with zip. (Optional)
 5. Press "Publish release".
+
+Also, you can use [automatic release](https://docs.travis-ci.com/user/deployment/releases/).
+
+Following is an example of the `.travis.yml` for automatic release.
+
+https://github.com/miya0001/miya-gallery/blob/master/.travis.yml
+
+You can generate `deploy:` section by [The Travis Client](https://github.com/travis-ci/travis.rb) like following.
+
+```
+$ travis setup releases
+```
 
 ## Example Projects
 
