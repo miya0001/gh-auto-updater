@@ -2,15 +2,15 @@
 /**
  * Class SampleTest
  *
- * @package Gh_Auto_Updater_Example
+ * @package GH_Auto_Updaterr_Example
  */
 
-use Miya\WP\GH_Auto_Update;
+use Miya\WP\GH_Auto_Updater;
 
 /**
  * Sample test case.
  */
-class GH_Auto_Update_Test extends WP_UnitTestCase
+class GH_Auto_Updater_Test extends WP_UnitTestCase
 {
 	protected $updater;
 
@@ -29,7 +29,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		// For a private function.
 		$reflection = new \ReflectionClass( $updater );
@@ -50,7 +50,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		// For a private function.
 		$reflection = new \ReflectionClass( $updater );
@@ -70,7 +70,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		$mock = dirname( __FILE__ ) . '/remote-version.json';
 		$remote_version = json_decode( file_get_contents( $mock ) );
@@ -94,7 +94,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		$transient = new \stdClass();
 		$transient->response = array();
@@ -123,7 +123,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		$transient = new \stdClass();
 		$transient->response = array();
@@ -148,7 +148,7 @@ class GH_Auto_Update_Test extends WP_UnitTestCase
 		$gh_user = 'miya0001';
 		$gh_repo = 'self-hosted-wordpress-plugin-on-github';
 		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Update( $plugin_slug, $gh_user, $gh_repo );
+		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 
 		$reflection = new \ReflectionClass( $updater );
 
