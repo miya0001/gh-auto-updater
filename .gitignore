@@ -1,2 +1,6 @@
 /vendor/
 .envrc
+/bin/
+/tests/
+.travis.yml
+phpunit.xml.dist
