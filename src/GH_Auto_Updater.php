@@ -28,17 +28,30 @@ class GH_Auto_Updater
 	private $slug;
 
 	/**
+	 * @var string $gh_token
+	 */
+	private $gh_token = null;
+
+	/**
 	 * Activate automatic update with GitHub API.
 	 *
 	 * @param string $plugin_slug The base name of the like `my-plugin/plugin.php`.
 	 * @param string $gh_user     The user name of the plugin on GitHub.
 	 * @param string $gh_repo     The repository name of the plugin on GitHub.
 	 */
-	public function __construct( $plugin_slug, $gh_user, $gh_repo )
+	public function __construct( $plugin_slug, $gh_user, $gh_repo, $gh_token = null )
 	{
 		$this->gh_user = $gh_user;
 		$this->gh_repo = $gh_repo;
 		$this->slug    = $plugin_slug;
+
+		if ( defined( 'GITHUB_ACCESS_TOKEN' ) && GITHUB_ACCESS_TOKEN ) {
+			$this->gh_token = GITHUB_ACCESS_TOKEN;
+		}
+
+		if ( ! empty( $gh_token ) ) {
+			$this->gh_token = $gh_token;
+		}
 
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'pre_set_site_transient_update_plugins' ) );
 		add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
@@ -258,9 +271,9 @@ class GH_Auto_Updater
 			$endpoint
 		);
 
-		if ( defined( 'GITHUB_ACCESS_TOKEN' ) && GITHUB_ACCESS_TOKEN ) {
+		if ( $this->gh_token ) {
 			$url = add_query_arg( array(
-				'access_token' => GITHUB_ACCESS_TOKEN
+				'access_token' => $this->gh_token
 			), $url );
 		}
 
