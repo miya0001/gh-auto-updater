@@ -38,6 +38,7 @@ class GH_Auto_Updater
 	 * @param string $plugin_slug The base name of the like `my-plugin/plugin.php`.
 	 * @param string $gh_user     The user name of the plugin on GitHub.
 	 * @param string $gh_repo     The repository name of the plugin on GitHub.
+	 * @param string $gh_token    API token for the GitHub
 	 */
 	public function __construct( $plugin_slug, $gh_user, $gh_repo, $gh_token = null )
 	{
@@ -57,6 +58,27 @@ class GH_Auto_Updater
 		add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
 		add_filter( 'upgrader_source_selection', array( $this, 'upgrader_source_selection' ), 1 );
 		add_action( 'admin_head', array( $this, "admin_head" ) );
+
+		add_filter( 'site_transient_update_plugins', array( $this, 'site_transient_update_plugins' ) );
+	}
+
+	/**
+	 * Disable update from WordPress.org
+	 *
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function site_transient_update_plugins( $value )
+	{
+		if ( ! empty( $value->response[ plugin_basename( __FILE__ ) ] ) ) {
+			$plugin = $value->response[ plugin_basename( __FILE__ ) ];
+			if ( 0 !== strpos( $plugin->package, 'https://github.com' ) ) {
+				unset( $value->response[ plugin_basename( __FILE__ ) ] );
+			}
+		}
+
+		return $value;
 	}
 
 	/**
