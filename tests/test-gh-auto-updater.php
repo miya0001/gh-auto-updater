@@ -86,22 +86,22 @@ class GH_Auto_Updater_Test extends WP_UnitTestCase
 	/**
 	 * get_api_data()
 	 */
-	function test_get_api_data_from_secret_repo()
-	{
-		$gh_user = 'miya0001';
-		$gh_repo = 'secret-plugin-example';
-		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
-
-		// For a private function.
-		$reflection = new \ReflectionClass( $updater );
-		$method = $reflection->getMethod( 'get_api_data' );
-		$method->setAccessible( true );
-		$res = $method->invoke( $updater, '/releases/latest' );
-		$expect = "https://api.github.com/repos/miya0001/secret-plugin-example/releases";
-		$this->assertTrue( 0 === strpos( $res->url, $expect ) );
-		$this->assertSame( 1, count( $res->assets ) );
-	}
+//	function test_get_api_data_from_secret_repo()
+//	{
+//		$gh_user = 'miya0001';
+//		$gh_repo = 'secret-plugin-example';
+//		$plugin_slug = 'hello/hello.php';
+//		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
+//
+//		// For a private function.
+//		$reflection = new \ReflectionClass( $updater );
+//		$method = $reflection->getMethod( 'get_api_data' );
+//		$method->setAccessible( true );
+//		$res = $method->invoke( $updater, '/releases/latest' );
+//		$expect = "https://api.github.com/repos/miya0001/secret-plugin-example/releases";
+//		$this->assertTrue( 0 === strpos( $res->url, $expect ) );
+//		$this->assertSame( 1, count( $res->assets ) );
+//	}
 
 	/**
 	 * get_dowload_url()
@@ -215,31 +215,31 @@ class GH_Auto_Updater_Test extends WP_UnitTestCase
 	/**
 	 * get_plugins_api_object()
 	 */
-	public function test_get_plugins_api_object_from_secret_repo()
-	{
-		$gh_user = 'miya0001';
-		$gh_repo = 'secret-plugin-example';
-		$plugin_slug = 'hello/hello.php';
-		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
-
-		$reflection = new \ReflectionClass( $updater );
-
-		$method = $reflection->getMethod( 'get_api_data' );
-		$method->setAccessible( true );
-		$remote_version = $method->invoke( $updater, '/releases/latest' );
-		$current_version = array( 'Name' => 'Hello' );
-
-		$method = $reflection->getMethod( 'get_plugins_api_object' );
-		$method->setAccessible( true );
-		$res = $method->invoke(
-			$updater,
-			$remote_version,
-			$current_version
-		);
-
-		$this->assertSame(
-			$res->homepage,
-			'https://github.com/miya0001/secret-plugin-example'
-		);
-	}
+//	public function test_get_plugins_api_object_from_secret_repo()
+//	{
+//		$gh_user = 'miya0001';
+//		$gh_repo = 'secret-plugin-example';
+//		$plugin_slug = 'hello/hello.php';
+//		$updater = new GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
+//
+//		$reflection = new \ReflectionClass( $updater );
+//
+//		$method = $reflection->getMethod( 'get_api_data' );
+//		$method->setAccessible( true );
+//		$remote_version = $method->invoke( $updater, '/releases/latest' );
+//		$current_version = array( 'Name' => 'Hello' );
+//
+//		$method = $reflection->getMethod( 'get_plugins_api_object' );
+//		$method->setAccessible( true );
+//		$res = $method->invoke(
+//			$updater,
+//			$remote_version,
+//			$current_version
+//		);
+//
+//		$this->assertSame(
+//			$res->homepage,
+//			'https://github.com/miya0001/secret-plugin-example'
+//		);
+//	}
 }
