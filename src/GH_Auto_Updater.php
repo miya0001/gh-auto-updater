@@ -73,8 +73,10 @@ class GH_Auto_Updater
 	{
 		if ( ! empty( $value->response[ plugin_basename( __FILE__ ) ] ) ) {
 			$plugin = $value->response[ plugin_basename( __FILE__ ) ];
-			if ( 0 !== strpos( $plugin->package, 'https://github.com' ) ) {
-				unset( $value->response[ plugin_basename( __FILE__ ) ] );
+			if ( ! empty( $plugin->package ) ) {
+				if ( 0 !== strpos( $plugin->package, 'https://github.com' ) ) {
+					unset( $value->response[ plugin_basename( __FILE__ ) ] );
+				}
 			}
 		}
 
