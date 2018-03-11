@@ -212,9 +212,9 @@ class GH_Auto_Updater_Test extends WP_UnitTestCase
 		}
 	}
 
-	/**
-	 * get_plugins_api_object()
-	 */
+//	/**
+//	 * get_plugins_api_object()
+//	 */
 //	public function test_get_plugins_api_object_from_secret_repo()
 //	{
 //		$gh_user = 'miya0001';
