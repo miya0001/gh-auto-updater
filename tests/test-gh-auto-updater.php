@@ -78,7 +78,6 @@ class GH_Auto_Updater_Test extends WP_UnitTestCase
 		$method = $reflection->getMethod( 'get_api_data' );
 		$method->setAccessible( true );
 		$res = $method->invoke( $updater, '/releases/latest' );
-		print_r( $res );
 		$expect = "https://api.github.com/repos/miya0001/self-hosted-wordpress-plugin-on-github/releases";
 		$this->assertTrue( 0 === strpos( $res->url, $expect ) );
 		$this->assertSame( 1, count( $res->assets ) );
